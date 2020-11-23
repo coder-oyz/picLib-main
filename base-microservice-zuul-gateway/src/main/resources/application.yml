@@ -1,0 +1,65 @@
+server:
+  port: 9501
+eureka:
+  client: # 客户端进行Eureka注册的配置
+    service-url:
+      defaultZone: http://admin:a@eureka1:7001/eureka,http://admin:a@eureka2:7002/eureka,http://admin:a@eureka3:7003/eureka
+    register-with-eureka: true
+  instance:
+    instance-id: microservice-zuul-gateway
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 90    #设置心跳间隔时间
+    lease-expiration-duration-in-seconds: 30  # 租约超时时间间隔
+
+# http://localhost:9501/microservice-provider-user/user/get/1
+# 根据在zuul中，根据服务名匹配地址，
+spring:
+  application:
+    name:  microservice-zuul-gateway
+  security:
+    user:
+      name: admin
+      password: b
+
+    # 配置前
+    # http://localhost:9501/microservice-provider-user/user/get/1
+    # 根据在zuul中，根据服务名匹配地址，
+    #zuul:
+    #  routes:    #路由配置
+    #    microservice-provider-user:  /user-proxy/**
+    # 修改application.yml文件，忽略掉用户服务的名称，通过服务名访问不到
+    #  ignored-services:
+    #microservice-provider-user  #忽略当前
+#    "*"   # 忽略所有
+
+
+#或者这样配置
+#zuul:
+#  routes:
+#    user.path: /user-proxy/**
+#    user.serviceId: microservice-provider-user
+#  ignored-services:
+#    "*"
+#  prefix: /yc-api    #公共前缀    http://localhost:9501/yc-api/user-proxy/user/get/1
+
+#公共前缀
+zuul:
+  routes:
+    user1:
+      path: /user1-proxy/**
+      serviceId: microservice-provider-user
+    user2:        #传统的路由方式
+      path: /user2-proxy/**
+      url: http://localhost:5555/
+    product:
+      path: /product-proxy/**
+      serviceId: MICROSERVICE-PROVIDER
+      sensitiveHeaders:   #指定服务内敏感信息不拦截设置
+  ignored-services:
+    "*"
+  prefix: /yc-api    #公共前缀
+
+
+logging:
+  level:
+    com.yc.springcloud_detail: debug

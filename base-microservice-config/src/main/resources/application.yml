@@ -1,0 +1,38 @@
+server:
+  port: 7101
+
+spring:
+  security:
+    user:
+      name: admin
+      password: a
+  application:
+    name: base-microservice-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/coder-oyz/piclib-config.git
+          label: main        # 一定要配置，因为github升级后，已经没有 master 分支了， 而config server 默认是 master,  现在已经是 main
+    bus:     # 开启bus消息总线
+      trace:
+        enabled: true
+    stream:
+      kafka:
+        binder:
+          brokers: 60.205.1.158
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:a@localhost:7301/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: base-microservice-config1
+
+    lease-expiration-duration-in-seconds: 90  #如果现在超过了5s的时间间隔( default: 90 s )
+    lease-renewal-interval-in-seconds: 30   #设置心跳的时间间隔( default:30s )
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
