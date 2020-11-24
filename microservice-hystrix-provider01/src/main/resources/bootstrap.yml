@@ -25,6 +25,11 @@ eureka:
     register-with-eureka: false
     service-url:
       defaultZone: http://admin:a@eureka1:7301/eureka
+  instance:
+        instance-id: provider_3  #实例名
+        #再解决provider端的心跳问题:
+        lease-expiration-duration-in-seconds: 90 #如果现在超过了5s的时间间隔( default: 90 s )
+        lease-renewal-interval-in-seconds: 30   #设置心跳的时间间隔( default:30s )
 
 
 

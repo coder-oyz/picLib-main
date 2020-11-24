@@ -16,9 +16,12 @@
         <module>base-microservice-hystrix-turbine</module>
         <module>base-microservice-zuul-gateway</module>
         <module>microservice-hystrix-provider01</module>
-        <module>microservice-consumer-feign</module>
+        <module>microservice-consumer-feign01</module>
+        <module>microservice-consumer-feign02</module>
+        <module>microservice-consumer-feign03</module>
         <module>picLib_domain</module>
         <module>microservice-hystrix-provider02</module>
+        <module>microservice-hystrix-provider03</module>
 
 
     </modules>

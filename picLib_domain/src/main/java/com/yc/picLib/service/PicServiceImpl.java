@@ -73,5 +73,13 @@ public class PicServiceImpl implements PicService {
         return pageDomain;
     }
 
+    @Override
+    public PicDomain getPic(int pid) {
+
+        Pics p= picMapper.selectByPrimaryKey(pid);
+        PicDomain pd = new PicDomain(p.getId(), p.getPath(), p.getDescription());
+        return pd;
+    }
+
 
 }

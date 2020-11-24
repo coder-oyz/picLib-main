@@ -16,4 +16,6 @@ public interface PicService {
      * @return
      */
     public PageDomain<PicDomain> listByPage(PicDomain picDomain);
+
+    public PicDomain getPic(int pid);
 }

@@ -1,10 +1,10 @@
 #联接配置中心
 spring:
   application:
-    name: provider2
+    name: consumer
   cloud:
     config:
-      name: config-provider           # 定义要读取的资源文件的名称
+      name: config-consumer           # 定义要读取的资源文件的名称
       profile: beta # 定义profile的 名称
       label: main # 定义配置文件所在的分支
       #uri: http://localhost:7101 # SpringCloudConfig的服务地址
@@ -26,11 +26,8 @@ eureka:
     service-url:
       defaultZone: http://admin:a@eureka1:7301/eureka
   instance:
-        instance-id: provider_2  #实例名
-        #再解决provider端的心跳问题:
-        lease-expiration-duration-in-seconds: 90 #如果现在超过了5s的时间间隔( default: 90 s )
-        lease-renewal-interval-in-seconds: 30   #设置心跳的时间间隔( default:30s )
-
-
-
+      instance-id: consumer_2  #实例名
+      #再解决provider端的心跳问题:
+      lease-expiration-duration-in-seconds: 90 #如果现在超过了5s的时间间隔( default: 90 s )
+      lease-renewal-interval-in-seconds: 30   #设置心跳的时间间隔( default:30s )
 

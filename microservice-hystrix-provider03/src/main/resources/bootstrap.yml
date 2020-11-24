@@ -1,7 +1,7 @@
 #联接配置中心
 spring:
   application:
-    name: provider2
+    name: provider
   cloud:
     config:
       name: config-provider           # 定义要读取的资源文件的名称
@@ -26,10 +26,10 @@ eureka:
     service-url:
       defaultZone: http://admin:a@eureka1:7301/eureka
   instance:
-        instance-id: provider_2  #实例名
-        #再解决provider端的心跳问题:
-        lease-expiration-duration-in-seconds: 90 #如果现在超过了5s的时间间隔( default: 90 s )
-        lease-renewal-interval-in-seconds: 30   #设置心跳的时间间隔( default:30s )
+      instance-id: provider_3  #实例名
+      #再解决provider端的心跳问题:
+      lease-expiration-duration-in-seconds: 90 #如果现在超过了5s的时间间隔( default: 90 s )
+      lease-renewal-interval-in-seconds: 30   #设置心跳的时间间隔( default:30s )
 
 
 
