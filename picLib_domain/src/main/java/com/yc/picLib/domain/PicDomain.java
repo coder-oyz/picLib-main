@@ -21,6 +21,9 @@ public class PicDomain extends PageDomain {
         this.description = description;
     }
 
+    public PicDomain() {
+    }
+
     public Integer getId() {
         return id;
     }

@@ -28,7 +28,7 @@ public class PicController {
     @GetMapping("/{id}")
     public PicDomain getPic(@PathVariable("id")Integer id){
         show();
-        return picService.getPic(id);
+        return picService.findOne(id);
     }
 
     @GetMapping("/findAll")

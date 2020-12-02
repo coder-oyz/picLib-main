@@ -32,9 +32,8 @@ public class ConsumerBookController {
 
     @GetMapping("/{id}")
     public PicDomain getPic(@PathVariable("id") Integer id){
-        return picService.getPic(id);
+        return picService.findOne(id);
     }
-
     @GetMapping("/findAll")
     public List<PicDomain> findAll( ){
         return picService.list();

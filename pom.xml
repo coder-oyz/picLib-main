@@ -22,6 +22,10 @@
         <module>picLib_domain</module>
         <module>microservice-hystrix-provider02</module>
         <module>microservice-hystrix-provider03</module>
+        <module>picLib-restapi</module>
+        <module>piclib-client</module>
+        <module>piclib-client-zuul</module>
+        <module>picLib-web</module>
 
 
     </modules>
@@ -37,12 +41,14 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>  <!-- 标记依赖是否可传递,标记为true表示可以传递依赖，以避免包冲突 -->
-        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--            <optional>true</optional>  &lt;!&ndash; 标记依赖是否可传递,标记为true表示可以传递依赖，以避免包冲突 &ndash;&gt;-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -54,17 +60,7 @@
 
         <dependencies>
 
-            <dependency>
-                <groupId>com.yc.picLib</groupId>
-                <artifactId>picLib_domain</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
 
-            <dependency>
-                <groupId>com.yc.picLib</groupId>
-                <artifactId>base-microservice-security</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -85,7 +81,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
-                <version>1.1.10</version>
+                <version>1.0.31</version>
             </dependency>
 
             <dependency>
@@ -98,7 +94,34 @@
                 <artifactId>mapper-spring-boot-starter</artifactId>
                 <version>2.0.4</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yc.picLib</groupId>
+                <artifactId>picLib_domain</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+
+
+
+            <dependency>
+                <groupId>com.yc.picLib</groupId>
+                <artifactId>picLib-client-zuul</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yc.picLib</groupId>
+                <artifactId>base-microservice-security</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <build>

@@ -1,65 +1,40 @@
 server:
-  port: 9501
-eureka:
-  client: # 客户端进行Eureka注册的配置
-    service-url:
-      defaultZone: http://admin:a@eureka1:7001/eureka,http://admin:a@eureka2:7002/eureka,http://admin:a@eureka3:7003/eureka
-    register-with-eureka: true
-  instance:
-    instance-id: microservice-zuul-gateway
-    prefer-ip-address: true
-    lease-renewal-interval-in-seconds: 90    #设置心跳间隔时间
-    lease-expiration-duration-in-seconds: 30  # 租约超时时间间隔
+  port: 9501     #zuul服务端口
 
-# http://localhost:9501/microservice-provider-user/user/get/1
-# 根据在zuul中，根据服务名匹配地址，
+eureka:
+  client: # zuul客户端到Eureka注册, 这样 feign的客户端就能找到zuul服务了
+    service-url:
+      defaultZone: http://admin:a@eureka1:7301/eureka
+    register-with-eureka: true      #zuul也要注册到eureka,给feign client要访问
+  instance:
+    instance-id: base-microservice-zuul-gateway1   #实例名
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10    #设置心跳间隔时间
+    lease-expiration-duration-in-seconds: 50  # 租约超时时间间隔
+
 spring:
   application:
-    name:  microservice-zuul-gateway
-  security:
+    name:  base-microservice-zuul-gateway    # zuul网关服务在eureka中的服务名
+  security:   # zuul网关服务的用户认证
     user:
       name: admin
-      password: b
-
-    # 配置前
-    # http://localhost:9501/microservice-provider-user/user/get/1
-    # 根据在zuul中，根据服务名匹配地址，
-    #zuul:
-    #  routes:    #路由配置
-    #    microservice-provider-user:  /user-proxy/**
-    # 修改application.yml文件，忽略掉用户服务的名称，通过服务名访问不到
-    #  ignored-services:
-    #microservice-provider-user  #忽略当前
-#    "*"   # 忽略所有
+      password: a
 
 
-#或者这样配置
-#zuul:
-#  routes:
-#    user.path: /user-proxy/**
-#    user.serviceId: microservice-provider-user
-#  ignored-services:
-#    "*"
-#  prefix: /yc-api    #公共前缀    http://localhost:9501/yc-api/user-proxy/user/get/1
-
-#公共前缀
 zuul:
   routes:
-    user1:
-      path: /user1-proxy/**
-      serviceId: microservice-provider-user
-    user2:        #传统的路由方式
-      path: /user2-proxy/**
-      url: http://localhost:5555/
-    product:
-      path: /product-proxy/**
-      serviceId: MICROSERVICE-PROVIDER
-      sensitiveHeaders:   #指定服务内敏感信息不拦截设置
-  ignored-services:
+    piclib:     #第一个路由服务
+      path: /piclib-proxy/**                   # 访问的路径
+      serviceId: MICROSERVICE-PROVIDER-PICLIB
+      sensitiveHeaders:            # zuul是基于过滤器机制，它会自动过滤掉敏感头, 这里设置要过滤的敏感头集合为空
+  ignored-services:      # "*"代表隐藏所有的服务名，这样就不能通过zuul直接用服务名访问真实的服务了.
     "*"
-  prefix: /yc-api    #公共前缀
-
+  prefix: /yc-api    #公共前缀       /yc-api/piclib-proxy/piclib/1
+  #sensitiveHeaders:    #去掉敏感头设置,   以实现将  权限 信息向过滤器链传递 的目标
 
 logging:
   level:
-    com.yc.springcloud_detail: debug
+    com.yc: debug
+    org.springframework.boot.autoconfigure.security: debug
+
+

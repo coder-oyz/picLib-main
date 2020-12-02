@@ -1,5 +1,6 @@
 package com.yc;
 
+import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -35,6 +36,10 @@ public class DaoConfiguration {
     public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
+        //可以加入各种拦截器
+        PageInterceptor pi = new PageInterceptor();
+        //   可以加入其它的配置
+        bean.setPlugins(pi);    //加入分页的插件的拦截器
         return bean.getObject();
     }
 

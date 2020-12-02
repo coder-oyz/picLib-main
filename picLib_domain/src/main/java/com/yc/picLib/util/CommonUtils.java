@@ -2,7 +2,6 @@ package com.yc.picLib.util;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.jboss.logging.Logger;
 
 import java.io.*;
 import java.lang.reflect.Array;
@@ -12,6 +11,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  * @author zbk
  */
 public class CommonUtils {
-    private final static Logger logger = Logger.getLogger(CommonUtils.class);
+    private final static Logger logger = Logger.getLogger(CommonUtils.class.getName());
 
     // 默认日期格式
     public static final String DATE_FMT = "yyyy-MM-dd"; // 日期
